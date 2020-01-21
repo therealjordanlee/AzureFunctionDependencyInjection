@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29709.97
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureFunctionDependencyInjection", "AzureFunctionDependencyInjection\AzureFunctionDependencyInjection.csproj", "{E8A123E8-391F-4819-81E3-5FE0231B0605}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E8A123E8-391F-4819-81E3-5FE0231B0605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8A123E8-391F-4819-81E3-5FE0231B0605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8A123E8-391F-4819-81E3-5FE0231B0605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8A123E8-391F-4819-81E3-5FE0231B0605}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {372F69DE-A92D-4B35-BFB8-75AB1086D364}
+	EndGlobalSection
+EndGlobal
