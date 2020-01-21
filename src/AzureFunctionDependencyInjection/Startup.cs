@@ -13,18 +13,28 @@ namespace AzureFunctionDependencyInjection
     {
         public override void Configure(IFunctionsHostBuilder builder)
         {
-            builder.Services.AddOptions<MessageResponderConfiguration>().Configure<IConfiguration>((messageResponderSettings, configuration) =>
-            {
-                configuration.GetSection("MessageResponder").Bind(messageResponderSettings);
-            });
+            // Registering Configurations (IOptions pattern)
+            builder
+                .Services
+                .AddOptions<MessageResponderConfiguration>()
+                .Configure<IConfiguration>((messageResponderSettings, configuration) =>
+                {
+                    configuration
+                    .GetSection("MessageResponder")
+                    .Bind(messageResponderSettings);
+                });
 
+            // Registering Serilog provider
             var logger = new LoggerConfiguration()
                 .WriteTo.Console()
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-
-            builder.Services.AddSingleton<IMessageResponderService, MessageResponderService>();
             builder.Services.AddLogging(lb => lb.AddSerilog(logger));
+
+            // Registering services
+            builder
+                .Services
+                .AddSingleton<IMessageResponderService, MessageResponderService>();
         }
     }
 }

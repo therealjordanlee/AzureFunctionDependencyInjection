@@ -17,13 +17,13 @@ namespace AzureFunctionDependencyInjection.Services
 
         public string GetPositiveMessage()
         {
-            _logger.LogDebug("Very Positive!");
+            _logger.LogInformation("Very Positive!");
             return _messageResponderConfiguration.PositiveResponseMessage;
         }
 
         public string GetNegativeMessage()
         {
-            _logger.LogDebug("Very negative!");
+            _logger.LogInformation("Very negative!");
             return _messageResponderConfiguration.NegativeResponseMessage;
         }
     }
