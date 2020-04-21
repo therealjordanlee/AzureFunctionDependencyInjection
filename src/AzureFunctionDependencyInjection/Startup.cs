@@ -30,7 +30,7 @@ namespace AzureFunctionDependencyInjection
                 .WriteTo.Console()
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-            builder.Services.AddLogging(lb => lb.ClearProviders().AddSerilog(logger));
+            builder.Services.AddLogging(lb => lb.AddSerilog(logger));
 
             // Registering services
             builder
