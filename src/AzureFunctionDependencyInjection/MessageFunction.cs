@@ -11,28 +11,28 @@ namespace AzureFunctionDependencyInjection
     public class MessageFunction
     {
         private IMessageResponderService _messageResponderService;
+        private ILogger _logger;
 
-        public MessageFunction(IMessageResponderService messageResponderService)
+        public MessageFunction(IMessageResponderService messageResponderService, ILoggerFactory loggerFactory)
         {
             _messageResponderService = messageResponderService;
+            _logger = loggerFactory.CreateLogger<MessageFunction>();
         }
 
         [FunctionName("positive")]
         public async Task<IActionResult> GetPositiveMessage(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             return new OkObjectResult(_messageResponderService.GetPositiveMessage());
         }
 
         [FunctionName("negative")]
         public async Task<IActionResult> GetNegativeMessage(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req,
-            ILogger log)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("C# HTTP trigger function processed a request.");
 
             return new OkObjectResult(_messageResponderService.GetNegativeMessage());
         }

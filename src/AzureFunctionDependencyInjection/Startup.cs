@@ -3,6 +3,7 @@ using AzureFunctionDependencyInjection.Services;
 using Microsoft.Azure.Functions.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Serilog;
 
 [assembly: FunctionsStartup(typeof(AzureFunctionDependencyInjection.Startup))]
@@ -29,7 +30,7 @@ namespace AzureFunctionDependencyInjection
                 .WriteTo.Console()
                 .WriteTo.File("log.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
-            builder.Services.AddLogging(lb => lb.AddSerilog(logger));
+            builder.Services.AddLogging(lb => lb.ClearProviders().AddSerilog(logger));
 
             // Registering services
             builder
