@@ -14,15 +14,17 @@ namespace AzureFunctionDependencyInjection
         public override void Configure(IFunctionsHostBuilder builder)
         {
             // Registering Configurations (IOptions pattern)
-            builder
-                .Services
-                .AddOptions<MessageResponderConfiguration>()
-                .Configure<IConfiguration>((messageResponderSettings, configuration) =>
-                {
-                    configuration
-                    .GetSection("MessageResponder")
-                    .Bind(messageResponderSettings);
-                });
+            AddConfiguration<MessageResponderConfiguration>(builder, "MessageResponder");
+            AddConfiguration<RandomResponderConfiguration>(builder, "RandomResponder");
+            //builder
+            //    .Services
+            //    .AddOptions<MessageResponderConfiguration>()
+            //    .Configure<IConfiguration>((messageResponderSettings, configuration) =>
+            //    {
+            //        configuration
+            //        .GetSection("MessageResponder")
+            //        .Bind(messageResponderSettings);
+            //    });
 
             // Registering Serilog provider
             var logger = new LoggerConfiguration()
@@ -35,6 +37,16 @@ namespace AzureFunctionDependencyInjection
             builder
                 .Services
                 .AddSingleton<IMessageResponderService, MessageResponderService>();
+        }
+
+        private void AddConfiguration<TOptions>(IFunctionsHostBuilder builder, string section) where TOptions : class
+        {
+            builder.Services
+                .AddOptions<TOptions>()
+                .Configure<IConfiguration>((settings, configuration) =>
+                {
+                    configuration.GetSection(section).Bind(settings);
+                });
         }
     }
 }

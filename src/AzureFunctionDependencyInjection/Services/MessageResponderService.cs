@@ -7,11 +7,15 @@ namespace AzureFunctionDependencyInjection.Services
     public class MessageResponderService : IMessageResponderService
     {
         private MessageResponderConfiguration _messageResponderConfiguration;
+        private RandomResponderConfiguration _randomResponderConfiguration;
         private ILogger<MessageResponderService> _logger;
 
-        public MessageResponderService(IOptions<MessageResponderConfiguration> messageResponderConfiguration, ILogger<MessageResponderService> logger)
+        public MessageResponderService(IOptions<MessageResponderConfiguration> messageResponderConfiguration,
+            IOptions<RandomResponderConfiguration> randomResponderConfiguration,
+            ILogger<MessageResponderService> logger)
         {
             _messageResponderConfiguration = messageResponderConfiguration.Value;
+            _randomResponderConfiguration = randomResponderConfiguration.Value;
             _logger = logger;
         }
 
@@ -25,6 +29,12 @@ namespace AzureFunctionDependencyInjection.Services
         {
             _logger.LogInformation("Very negative!");
             return _messageResponderConfiguration.NegativeResponseMessage;
+        }
+
+        public string GetRandomMessage()
+        {
+            _logger.LogInformation("Random");
+            return _randomResponderConfiguration.RandomMessage;
         }
     }
 }

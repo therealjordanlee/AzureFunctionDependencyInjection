@@ -5,5 +5,6 @@
         string GetPositiveMessage();
 
         string GetNegativeMessage();
+        string GetRandomMessage();
     }
 }
